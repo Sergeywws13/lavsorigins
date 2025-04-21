@@ -19,7 +19,9 @@ async def start_command(message: Message):
         inline_keyboard=[
             [InlineKeyboardButton(text="Описание устройства", callback_data="description")],
             [InlineKeyboardButton(text="Эффект", callback_data="effect")],
-            [InlineKeyboardButton(text="Способ применения", callback_data="use")]
+            [InlineKeyboardButton(text="Способ применения", callback_data="use")],
+            [InlineKeyboardButton(text="Задать вопрос?", callback_data="question")],
+            [InlineKeyboardButton(text="Гарантийные обязательства/Брак продукции", callback_data="garant")],
         ]
     )
     
