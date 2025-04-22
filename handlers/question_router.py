@@ -1,8 +1,12 @@
+import logging
 from aiogram import Router, types
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from utils import find_answer
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Создание нового роутера
 question_router = Router()
@@ -29,6 +33,7 @@ async def question_callback(query: types.CallbackQuery, state: FSMContext):
 
 @question_router.message(QuestionStates.waiting_for_question)
 async def handle_question(message: types.Message, state: FSMContext):
+    logger.info(f"Получен вопрос: {message.text}")  # Логирование полученного вопроса
     question = message.text
     answer = find_answer(question)  # Используем вашу функцию для поиска ответа
 

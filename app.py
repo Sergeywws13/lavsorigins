@@ -14,8 +14,8 @@ async def main():
     dp = Dispatcher(bot=bot)
 
     dp.include_router(start_router)
-    dp.include_router(callback_router)
     dp.include_router(question_router)
+    dp.include_router(callback_router)
 
     await dp.start_polling(bot)
 
