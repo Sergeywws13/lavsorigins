@@ -26,14 +26,22 @@ def get_google_sheet():
 def find_answer(question):
     sheet = get_google_sheet()
     data = sheet.get_all_records()
-
-    for row in data:
-        if re.search(r'\b' + re.escape(question.lower()) + r'\b', row['Вопрос'].lower()):
-            return row['ОТВЕТ']
     
-    # Логирование, если вопрос не найден
-    logger.info(f"Вопрос '{question}' не найден в таблице.")
-    return None
+    keywords = re.findall(r'\w+', question.lower())
+    
+    best_match = None
+    max_score = 0
+    
+    for row in data:
+        question_text = row['Вопрос'].lower()
+        score = sum(1 for word in keywords if re.search(r'\b' + re.escape(word) + r'\b', question_text))
+        
+        if score > max_score:
+            max_score = score
+            best_match = row['ОТВЕТ']
+    
+    return best_match if max_score > 0 else None
+
 
 async def handle_question(message: types.Message):
     question = message.text

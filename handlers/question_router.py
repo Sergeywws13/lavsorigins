@@ -46,4 +46,4 @@ async def handle_question(message: types.Message, state: FSMContext):
         )
     
     # Сбрасываем состояние после обработки вопроса
-    await state.finish()
+    await state.clear()
