@@ -7,7 +7,7 @@ start_router = Router()
 @start_router.message(Command("start"))
 async def start_command(message: Message):
     text = """
-    🌟 Добрый день! 🌟
+🌟 Добрый день! 🌟
 
 Используйте кнопки меню ниже. С удовольствием помогу вам!
     """
@@ -22,7 +22,7 @@ async def start_command(message: Message):
         ]
     )
     await message.answer_photo(
-        photo=FSInputFile("images/start.jpg", filename="LAVSORIGINS.jpg"),
+        photo=FSInputFile("images/1.png", filename="LAVSORIGINS.jpg"),
         caption=text,
         reply_markup=keyboard
     )
