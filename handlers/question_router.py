@@ -8,10 +8,8 @@ from utils import find_answer
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Создание нового роутера
 question_router = Router()
 
-# Определение состояний
 class QuestionStates(StatesGroup):
     waiting_for_question = State()
 
@@ -28,14 +26,13 @@ async def question_callback(query: types.CallbackQuery, state: FSMContext):
     )
     await query.message.answer(text, reply_markup=keyboard)
     
-    # Устанавливаем состояние ожидания вопроса
     await state.set_state(QuestionStates.waiting_for_question)
 
 @question_router.message(QuestionStates.waiting_for_question)
 async def handle_question(message: types.Message, state: FSMContext):
-    logger.info(f"Получен вопрос: {message.text}")  # Логирование полученного вопроса
+    logger.info(f"Получен вопрос: {message.text}")
     question = message.text
-    answer = find_answer(question)  # Используем вашу функцию для поиска ответа
+    answer = find_answer(question)
 
     if answer:
         await message.answer(answer)
@@ -45,5 +42,4 @@ async def handle_question(message: types.Message, state: FSMContext):
             f"[Вопросы на WILDBERRIES](https://example.com/questions) и [Отзывы на WILDBERRIES](https://example.com/reviews)"
         )
     
-    # Сбрасываем состояние после обработки вопроса
     await state.clear()

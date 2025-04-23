@@ -10,13 +10,12 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-# Настройка доступа к Google Sheets
 def get_google_sheet():
     try:
         scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
         creds = ServiceAccountCredentials.from_json_keyfile_name(GOOGLE_SHEET_CREDENTIALS, scope)
         client = gspread.authorize(creds)
-        sheet = client.open(GOOGLE_SHEET_NAME).sheet1  # Открываем первый лист
+        sheet = client.open(GOOGLE_SHEET_NAME).sheet1
         return sheet
     except Exception as e:
         logging.error(f"Ошибка при получении Google Sheet: {e}")
