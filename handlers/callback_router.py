@@ -8,7 +8,7 @@ callback_router = Router()
 # Словарь с путями к изображениям для каждого раздела
 IMAGES = {
     "start": "images/1.png",
-    "description": "images/description.jpg",
+    "description": "images/insrict.jpg",
     "effect": "images/effect.jpg",
     "use": "images/use.jpg",
     "question": "images/1.png",
